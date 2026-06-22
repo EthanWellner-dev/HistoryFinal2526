@@ -2,20 +2,25 @@
   "40s": [
     {
       "id": "40s-1",
-      "title": "Idk",
-      "description": "Idk",
+      "title": "Babe Didrikson’s Javelin",
+      "description": "Babe Didrikson’s Javelin",
       "image": "40s-1.jpg",
       "sources":[
-        
+        "https://s.hdnux.com/photos/04/02/47/1059325/4/rawImage.jpg",
+        "https://exhibits.library.gsu.edu/equal-playing-fields/womens-professional-sports/",
+        "https://aagpbl.org/history/league-history",
+        "https://www.encyclopedia.com/social-sciences/culture-magazines/1940s-sports-overview"
       ]
     },
     {
       "id": "40s-2",
-      "title": "idk",
-      "description": "idk",
+      "title": "Patty Berg’s Trophy",
+      "description": "Patty Berg’s Trophy",
       "image": "40s-2.jpg",
       "sources":[
-        
+        "https://media.gettyimages.com/id/517330064/photo/mrs-phillip-g-senz-president-of-womens-western-golf-association-and-mrs-babe-zaharias-hold.jpg?s=612x612&w=0&k=20&c=djl6dIOwt99A8fO6r90sVsIeWuBlY3qzS6WIxWSxW1o=",
+        "https://www.britannica.com/biography/Babe-Didrikson-Zaharias",
+        "https://www.encyclopedia.com/social-sciences/culture-magazines/1940s-sports-overview"
       ]
     }
   ],
