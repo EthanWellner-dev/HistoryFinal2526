@@ -13,26 +13,27 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(135deg, #5a4a42 0%, #6f5f57 100%); box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+    <nav class="navbar navbar-expand-xl navbar-dark navbar-container nb-background-color">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="home.html" style="font-size: 1.5rem; letter-spacing: 1px; color: white;">Women's Sports Museum</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="home.html">
+                <img src="artifacts/images/feminist.png" alt="Women in Sports" class="nav-image">
+                <span>Women's Sports Museum</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"
+                    aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html" style="color: white;">Home</a>
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-xl-0 align-items-center">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="home.html">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about" style="color: white;">About</a>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#about">About</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown mx-2">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false" style="color: white;">
-                            Artifacts by Decade
-                        </a>
+                           aria-expanded="false">Artifacts by Decade</a>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="decade.html?decade=40s">1940s</a></li>
                             <li><a class="dropdown-item" href="decade.html?decade=50s">1950s</a></li>
@@ -40,28 +41,60 @@
                             <li><a class="dropdown-item" href="decade.html?decade=70s">1970s+</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
     
     <!-- Hero Section -->
-    <section class="hero-section text-white py-5" style="background: linear-gradient(135deg, #5a4a42 0%, #6f5f57 100%);">
-        <div class="container py-5">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <h1 class="display-3 fw-bold mb-4">Women's Sports Museum</h1>
-                    <p class="lead mb-4">Celebrating the remarkable achievements and inspiring stories of women in sports throughout history</p>
-                    <a href="#decades" class="btn btn-light btn-lg fw-bold">Explore Artifacts</a>
+    <section class="image-background hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('images/background.png');">
+        <div class="image-text fade-in">
+            <h1><b>Women's Sports Museum</b></h1>
+            <p class="lead mb-4">Celebrating the remarkable achievements and inspiring stories of women in sports throughout history.</p>
+            <a href="#decades" class="btn btn-light btn-lg fw-bold">Explore Artifacts</a>
+        </div>
+    </section>
+
+    <section id="about" class="feminism-overview py-5">
+        <div class="container">
+            <div class="text-center feminism-text">
+                <h1 class="section-heading"><b>Why This Museum Matters</b></h1>
+                <p class="mb-0">From early pioneers to modern champions, women's athletics has reshaped culture, expanded opportunity, and opened new doors for future generations.</p>
+            </div>
+            <div class="row align-items-center gx-5 mt-5 fade-in">
+                <div class="col-md-6">
+                    <div class="overview-text scroll-reveal">
+                        <p>Explore personal stories, iconic artifacts, and historic milestones that highlight how female athletes have challenged expectations and changed the world of sports forever.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="background scroll-slide-right">
+                        <img src="artifacts/images/feminism.png" alt="Feminism in Sports" class="image-size">
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center gx-5 mt-5 flex-md-row-reverse fade-in">
+                <div class="col-md-6">
+                    <div class="overview-text-sports scroll-reveal">
+                        <p>Learn how each decade brought new breakthroughs, more visibility, and a stronger platform for women to compete, lead, and inspire.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="background scroll-slide-left">
+                        <img src="artifacts/images/background.png" alt="Women in Sports" class="image-size">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <!-- Decades Section -->
     <section class="py-5" id="decades">
         <div class="container">
-            <h2 class="text-center mb-5" style="color: #5a4a42;">Explore by Decade</h2>
+            <h2 class="text-center section-heading">Explore by Decade</h2>
             <div class="row g-4" id="decade-cards">
                 <div class="col-md-6 col-lg-3 fade-in">
                     <a href="decade.html?decade=40s" class="text-decoration-none">
@@ -108,9 +141,10 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <p class="mb-0">&copy; 2026 Women's Sports Museum. Celebrating female athletes worldwide.</p>
+    <footer class="footer py-5">
+        <div class="container d-flex justify-content-center align-items-center gap-3 flex-wrap">
+            <p class="lead m-0 text-center text-white">&copy; 2026 Women's Sports Museum. Celebrating female athletes worldwide.</p>
+            <a href="#top" class="mt-2"><i class="bi bi-gender-female footer-icon"></i></a>
         </div>
     </footer>
 </body>

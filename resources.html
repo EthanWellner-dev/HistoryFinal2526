@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/all.css">
+    <title>Women's Sports Museum - Resources</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-xl navbar-dark navbar-container nb-background-color">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="home.html">
+                <img src="artifacts/images/feminist.png" alt="Women in Sports" class="nav-image">
+                <span>Women's Sports Museum</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"
+                    aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-xl-0 align-items-center">
+                    <li class="nav-item mx-2"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link" href="home.html#about">About</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link" href="resources.html">Resources</a></li>
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Artifacts</a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="decade.html?decade=40s">1940s</a></li>
+                            <li><a class="dropdown-item" href="decade.html?decade=50s">1950s</a></li>
+                            <li><a class="dropdown-item" href="decade.html?decade=60s">1960s</a></li>
+                            <li><a class="dropdown-item" href="decade.html?decade=70s">1970s+</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
+        <div class="text-center mb-5">
+            <h1 class="section-heading">Sources & Resources</h1>
+            <p class="lead">A decade-by-decade listing of artifact sources and references used in this site.</p>
+        </div>
+        <div id="resources-container" class="row g-4"></div>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2026 Women's Sports Museum. Celebrating female athletes worldwide.</p>
+        </div>
+    </footer>
+
+    <script src="js/data-cache.js"></script>
+    <script>
+        fetchJsonCached('artifacts/data/artifacts.json')
+            .then(data => {
+                const container = document.getElementById('resources-container');
+                container.innerHTML = Object.entries(data).map(([decade, artifacts]) => {
+                    return `
+                        <div class="col-12 resource-decade">
+                            <div class="resource-card p-4 rounded-4 shadow-sm">
+                                <h2>${decade === '70s' ? '1970s+' : '19' + decade}</h2>
+                                <div class="resource-list">
+                                    ${artifacts.map(artifact => `
+                                        <div class="resource-artifact mb-4">
+                                            <h3>${artifact.title}</h3>
+                                            <p>${artifact.description}</p>
+                                            ${artifact.sources && artifact.sources.length > 0 ? `
+                                                <ul>
+                                                    ${artifact.sources.map(source => `
+                                                        <li><a href="${source}" target="_blank" rel="noopener noreferrer">${source}</a></li>
+                                                    `).join('')}
+                                                </ul>
+                                            ` : '<p><em>No sources listed.</em></p>'}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            })
+            .catch(error => {
+                document.getElementById('resources-container').innerHTML = `
+                    <div class="col-12">
+                        <div class="alert alert-danger" role="alert">
+                            Could not load resources: ${error.message}
+                        </div>
+                    </div>
+                `;
+            });
+    </script>
+</body>
+</html>

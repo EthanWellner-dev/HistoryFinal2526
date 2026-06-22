@@ -20,15 +20,15 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 function loadDecadeArtifacts(decade) {
-    fetch('artifacts/data/artifacts.json')
-        .then(response => {
-            if (!response.ok) throw new Error('Artifacts data not found');
-            return response.json();
-        })
-        .then(data => {
-            const artifacts = data[decade];
-            
-            if (!artifacts || artifacts.length === 0) {
+    Promise.all([
+        fetchJsonCached('artifacts/data/artifacts.json'),
+        fetchJsonCached('artifacts/data/summaries.json')
+    ])
+    .then(([data, summaryData]) => {
+        const artifacts = data[decade];
+        const decadeSummary = summaryData[decade] ? summaryData[decade].trim() : '';
+        
+        if (!artifacts || artifacts.length === 0) {
                 document.getElementById('artifacts-container').innerHTML = `
                     <div class="col-lg-10 mx-auto">
                         <div class="alert alert-warning" role="alert">
@@ -45,37 +45,68 @@ function loadDecadeArtifacts(decade) {
             const decadeDisplay = decade === '70s' ? '1970s & Beyond' : `19${decade}`;
             document.getElementById('decade-title').textContent = `${decadeDisplay} Artifacts`;
             
-            // Build artifact cards
             const container = document.getElementById('artifacts-container');
             container.innerHTML = '';
-            
-            artifacts.forEach((artifact, index) => {
-                const card = document.createElement('div');
-                card.className = 'col-md-6 col-lg-4 fade-in';
-                
-                const imageHtml = artifact.image ? 
-                    `<div class="card-img-wrapper" style="height: 200px; overflow: hidden; border-radius: 8px 8px 0 0; background: linear-gradient(135deg, #5a4a42 0%, #6f5f57 100%); display: flex; align-items: center; justify-content: center; color: white; text-align: center;">
-                        <div style="font-size: 3rem;">📜</div>
-                    </div>` : '';
-                
-                card.innerHTML = `
-                    <a href="artifact.html?decade=${decade}&artifact=${artifact.id}" class="text-decoration-none">
-                        <div class="card h-100 shadow-sm card-hover">
-                            ${imageHtml}
-                            <div class="card-body">
-                                <h5 class="card-title">${artifact.title}</h5>
-                                <p class="card-text text-muted">${artifact.description}</p>
-                                <small class="text-muted">Click to learn more</small>
+
+            const decadeLabels = {
+                '40s': '1940s',
+                '50s': '1950s',
+                '60s': '1960s',
+                '70s': '1970s+'
+            };
+            const decades = ['40s', '50s', '60s', '70s'];
+            const currentIndex = decades.indexOf(decade);
+            const previousDecade = currentIndex > 0 ? decades[currentIndex - 1] : null;
+            const nextDecade = currentIndex < decades.length - 1 ? decades[currentIndex + 1] : null;
+
+            const decadeNavigationTop = `
+                <div class="row mb-4">
+                    <div class="col-12 d-flex justify-content-between align-items-center decade-navigation">
+                        ${previousDecade ? `<a href="decade.html?decade=${previousDecade}" class="btn btn-outline-primary">← ${decadeLabels[previousDecade]}</a>` : '<span></span>'}
+                        <span class="text-muted">${decadeLabels[decade]} timeline</span>
+                        ${nextDecade ? `<a href="decade.html?decade=${nextDecade}" class="btn btn-outline-primary">${decadeLabels[nextDecade]} →</a>` : '<span></span>'}
+                    </div>
+                </div>
+            `;
+
+            const selectedArtifacts = artifacts.slice(0, 2);
+            const timelineItems = selectedArtifacts.map((artifact, index) => {
+                return `
+                    <div class="timeline-step">
+                        <div class="step-marker"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-card-body">
+                                <div class="timeline-card-title">${artifact.title}</div>
+                                <img src="artifacts/images/${artifact.image}" alt="${artifact.title}" class="timeline-card-image" onerror="this.style.display='none';">
+                                <a class="timeline-card-toggle btn btn-secondary mt-3" href="artifact.html?artifact=${artifact.id}">
+                                    Show artifact details
+                                </a>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 `;
-                
-                container.appendChild(card);
-            });
+            }).join('');
 
-            // Setup scroll animations
+            container.innerHTML = `
+                <div class="col-12 timeline-section">
+                    ${decadeNavigationTop}
+                    ${decadeSummary ? `<div class="decade-summary px-3 mb-4">${decadeSummary}</div>` : ''}
+                    <div class="timeline-message px-3 mb-4">
+                        Click a milestone below to reveal the artifact story.
+                    </div>
+                    <div class="timeline-steps">
+                        ${timelineItems}
+                    </div>
+                </div>
+            `;
+
             setupScrollAnimations();
+            if (typeof setupScrollReveal === 'function') {
+                setupScrollReveal();
+            }
+            if (typeof setupDirectionalScroll === 'function') {
+                setupDirectionalScroll();
+            }
         })
         .catch(error => {
             console.error('Error loading artifacts:', error);

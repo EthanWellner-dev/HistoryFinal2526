@@ -1,6 +1,11 @@
 // Advanced Scroll Animations
 let lastScrollTop = 0;
 let scrollDirection = 'down';
+let hasScrolled = false;
+let scrollRevealObserver;
+let directionalObserver;
+let pendingRevealElements = [];
+let pendingDirectionalElements = [];
 
 document.addEventListener('DOMContentLoaded', function() {
     setupNavbarScroll();
@@ -12,9 +17,24 @@ document.addEventListener('DOMContentLoaded', function() {
 // Detect scroll direction
 window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    if (!hasScrolled) {
+        hasScrolled = true;
+        activateScrollObservers();
+    }
     scrollDirection = scrollTop > lastScrollTop ? 'down' : 'up';
     lastScrollTop = scrollTop;
 });
+
+function activateScrollObservers() {
+    if (scrollRevealObserver && pendingRevealElements.length) {
+        pendingRevealElements.forEach(el => scrollRevealObserver.observe(el));
+        pendingRevealElements = [];
+    }
+    if (directionalObserver && pendingDirectionalElements.length) {
+        pendingDirectionalElements.forEach(el => directionalObserver.observe(el));
+        pendingDirectionalElements = [];
+    }
+}
 
 // Navbar scroll effect
 function setupNavbarScroll() {
@@ -33,7 +53,7 @@ function setupNavbarScroll() {
 // Scroll reveal animations using Intersection Observer
 function setupScrollReveal() {
     const revealElements = document.querySelectorAll(
-        'section h2, .fade-in, .artifact-content'
+        'section h2, .fade-in, .scroll-reveal, .timeline-card, .hero-section, .background, .overview-text, .overview-text-sports, .decade-summary, .timeline-message, .decade-navigation'
     );
 
     const observerOptions = {
@@ -43,30 +63,35 @@ function setupScrollReveal() {
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                const delay = index * 0.05;
-                entry.target.style.animationDelay = `${delay}s`;
-                
-                if (!entry.target.classList.contains('fade-in')) {
-                    entry.target.classList.add('scroll-reveal', 'visible');
-                }
-                
-                observer.unobserve(entry.target);
+            if (!entry.isIntersecting) return;
+
+            const delay = index * 0.05;
+            entry.target.style.animationDelay = `${delay}s`;
+            
+            if (!entry.target.classList.contains('fade-in')) {
+                entry.target.classList.add('scroll-reveal', 'visible');
             }
+            
+            observer.unobserve(entry.target);
         });
     }, observerOptions);
 
     revealElements.forEach(el => {
         if (!el.classList.contains('fade-in')) {
-            observer.observe(el);
+            if (hasScrolled) {
+                observer.observe(el);
+            } else {
+                pendingRevealElements.push(el);
+            }
         }
     });
+    scrollRevealObserver = observer;
 }
 
 // Directional scroll animations - elements fly in from sides
 function setupDirectionalScroll() {
     const elements = document.querySelectorAll(
-        '.card, section h2, section p, .container > div'
+        '.card, .timeline-card, .hero-section, .image-text, section h2, section p, .container > div'
     );
 
     const observerOptions = {
@@ -76,19 +101,17 @@ function setupDirectionalScroll() {
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                // Determine which side to animate from based on position
+            if (!entry.target.classList.contains('slide-in-left') && !entry.target.classList.contains('slide-in-right')) {
                 const rect = entry.target.getBoundingClientRect();
                 const isLeftSide = rect.left < window.innerWidth / 2;
-                
-                if (isLeftSide) {
-                    entry.target.classList.add('slide-in-left', 'visible');
-                } else {
-                    entry.target.classList.add('slide-in-right', 'visible');
-                }
-                
-                observer.unobserve(entry.target);
+                entry.target.classList.add(isLeftSide ? 'slide-in-left' : 'slide-in-right');
             }
+
+            if (!entry.isIntersecting) return;
+            if (!hasScrolled && window.scrollY === 0) return;
+
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
         });
     }, observerOptions);
 
@@ -96,9 +119,14 @@ function setupDirectionalScroll() {
         if (!el.classList.contains('navbar') && 
             !el.classList.contains('footer') &&
             !el.classList.contains('hero-section')) {
-            observer.observe(el);
+            if (hasScrolled) {
+                observer.observe(el);
+            } else {
+                pendingDirectionalElements.push(el);
+            }
         }
     });
+    directionalObserver = observer;
 }
 
 // Parallax effect

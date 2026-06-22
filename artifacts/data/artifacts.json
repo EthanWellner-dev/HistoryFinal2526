@@ -2,81 +2,88 @@
   "40s": [
     {
       "id": "40s-1",
-      "title": "The Pioneer Era",
-      "description": "The beginning of women's organized sports participation",
-      "image": "pioneer-era.jpg"
+      "title": "Idk",
+      "description": "Idk",
+      "image": "40s-1.jpg",
+      "sources":[
+        
+      ]
     },
     {
       "id": "40s-2",
-      "title": "Baseball League Formation",
-      "description": "All-American Girls Professional Baseball League established",
-      "image": "baseball-league.jpg"
-    },
-    {
-      "id": "40s-3",
-      "title": "Track & Field Breakthroughs",
-      "description": "Women break into amateur track and field competitions",
-      "image": "track-field.jpg"
+      "title": "idk",
+      "description": "idk",
+      "image": "40s-2.jpg",
+      "sources":[
+        
+      ]
     }
   ],
   "50s": [
     {
       "id": "50s-1",
-      "title": "Tennis Evolution",
-      "description": "Women's tennis gains international recognition",
-      "image": "tennis-evolution.jpg"
+      "title": "Founding the LPGA",
+      "description": "Women's golf gains professional recognition",
+      "image": "50s-1.jpg",
+      "sources":[
+        "https://www.golfheritage.org/blog/the-u-s-womens-open-that-still-feels-impossible/",
+        "https://www.espn.com/espnw/voices/story/_/id/15464223/the-conversation-founders-remembers-women-defied-all-odds-create-lpga",
+        "https://www.lpga.com/news/2025/on-this-date-lpga-charter-is-signed-at-1950-us-womens-open"
+      ]
     },
     {
       "id": "50s-2",
-      "title": "Professional Golf",
-      "description": "Women's golf becomes a professional sport",
-      "image": "golf-pro.jpg"
-    },
-    {
-      "id": "50s-3",
-      "title": "Olympic Expansion",
-      "description": "More sports open to female Olympic competitors",
-      "image": "olympic-expand.jpg"
+      "title": "How the TSU Tigerbelles Debunked Pseudoscience and Won the Eyes of the Nation",
+      "description": "Texas Southern University's Tigerbelles track team defied stereotypes and achieved Olympic glory",
+      "image": "50s-2.jpg",
+      "sources":[
+        "https://digitalscholarship.tnstate.edu/library-digital-collections/95/",
+        "https://www.youtube.com/watch?v=L1fDCsSeW_k&t=15",
+        "https://i.ytimg.com/vi/Kq5OL_X65sI/maxresdefault.jpg"
+      ]
     }
   ],
   "60s": [
     {
       "id": "60s-1",
-      "title": "Wilma Rudolph's Legacy",
-      "description": "The fastest woman on Earth sets Olympic records",
-      "image": "wilma-rudolph.jpg"
+      "title": "idk",
+      "description": "idk",
+      "image": "60s-1.jpg",
+      "sources":[
+        
+      ]
     },
     {
       "id": "60s-2",
-      "title": "Boston Marathon Revolution",
-      "description": "Kathrine Switzer breaks the gender barrier in running",
-      "image": "boston-marathon.jpg"
-    },
-    {
-      "id": "60s-3",
-      "title": "Civil Rights in Sports",
-      "description": "Women athletes become symbols of social change",
-      "image": "civil-rights-sports.jpg"
+      "title": "Idk",
+      "description": "Idk",
+      "image": "60s-2.jpg",
+      "sources":[
+        
+      ]
     }
   ],
   "70s": [
     {
       "id": "70s-1",
-      "title": "Title IX Revolution",
-      "description": "Education amendment mandates equal opportunity in sports",
-      "image": "title-ix.jpg"
+      "title": "Title IX",
+      "description": "The Signing of Title IX",
+      "image": "70s-1.jpg",
+      "sources":[
+        "https://www.ed.gov/laws-and-policy/civil-rights-laws/title-ix-and-sex-discrimination",
+        "https://littlevillagemag.com/the-long-game-six-on-six-basketball/"
+      ]
     },
     {
       "id": "70s-2",
-      "title": "Billie Jean King's Fight",
-      "description": "The battle for equal prize money and recognition",
-      "image": "billie-jean-king.jpg"
-    },
-    {
-      "id": "70s-3",
-      "title": "Professional Leagues Emerge",
-      "description": "Women establish their own professional sports leagues",
-      "image": "pro-leagues.jpg"
+      "title": "Maria Pepe and the Fight for Equality in Sports",
+      "description": "Maria Pepe and the Fight for Equality in Sports",
+      "image": "70s-2.jpg",
+      "sources":[
+        "https://wheninyourstate.com/pennsylvania/the-girl-who-got-kicked-out-of-little-league-and-changed-baseball-history-in-1974/",
+        "https://www.hobokengirl.com/maria-pepe-hoboken-little-league-legend/",
+        "https://nypost.com/2024/04/05/lifestyle/50-years-ago-maria-pepe-won-a-little-league-for-the-girls/"
+      ]
     }
   ]
 }
